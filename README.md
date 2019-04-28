@@ -1,1 +1,1 @@
-# kamicopy
+# kamikaze

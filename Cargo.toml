@@ -1,0 +1,7 @@
+[package]
+name = "kamikaze"
+version = "0.1.0"
+authors = ["Ente <ducksource@duckpond.ch>"]
+edition = "2018"
+
+[dependencies]
