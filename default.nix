@@ -12,6 +12,7 @@ with import "${src.out}/rust-overlay.nix" pkgs pkgs;
 stdenv.mkDerivation {
   name = "rust-env";
   buildInputs = [
+    #latest.rustChannels.nightly.rust
     rust-musl
   ];
 
