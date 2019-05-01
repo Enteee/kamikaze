@@ -10,7 +10,7 @@ curl -s "https://api.github.com/repos/${REPO}/releases/latest" \
 
 trap 'rm kamikaze-download' EXIT
 
-if [[ $EUID -ne 0 ]]; then
+if [[ $(id -u) -ne 0 ]]; then
   sudo $INSTALL
 else
   $INSTALL
