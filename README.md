@@ -32,7 +32,7 @@ $ kamikaze id -u
 $ nix-build
 ```
 
-**Note**: The resulgint binary can be found under `result/bin/kamikaze'
+**Note**: The built binary can be found under `result/bin/kamikaze'
 
 ## Development Environment
 

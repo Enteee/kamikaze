@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 set -euo pipefail
 REPO="Enteee/kamikaze"
+INSTALL="install -m 4755 -o root kamikaze-download kamikaze"
 
 curl -s "https://api.github.com/repos/${REPO}/releases/latest" \
    | grep "browser_download_url" \
@@ -8,4 +9,9 @@ curl -s "https://api.github.com/repos/${REPO}/releases/latest" \
    | xargs -n1 curl -s -L --output kamikaze-download
 
 trap 'rm kamikaze-download' EXIT
-sudo install -m 4755 -o root kamikaze-download kamikaze
+
+if [[ $EUID -ne 0 ]]; then
+  sudo $INSTALL
+else
+  $INSTALL
+fi
