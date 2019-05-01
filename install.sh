@@ -1,2 +1,11 @@
 #!/usr/bin/env sh
-curl "$(uname -m)"
+set -euo pipefail
+REPO="Enteee/kamikaze"
+
+curl -s "https://api.github.com/repos/${REPO}/releases/latest" \
+   | grep "browser_download_url" \
+   | cut -d '"' -f 4 \
+   | xargs -n1 curl -s -L --output kamikaze-download
+
+trap 'rm kamikaze-download' EXIT
+sudo install -m 4755 -o root kamikaze-download kamikaze
