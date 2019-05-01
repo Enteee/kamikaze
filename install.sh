@@ -1,4 +1,2 @@
 #!/usr/bin/env sh
-REPO=""
-
-curl "
+curl "$(uname -m)"
