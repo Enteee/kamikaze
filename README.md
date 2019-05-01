@@ -11,7 +11,7 @@ steps in. Install `kamikaze` inside your container and give your startup routine
 $ curl https://raw.githubusercontent.com/Enteee/kamikaze/master/install.sh | sh
 ```
 
-**Note**: This will use `sudo` to set ownership of `kamikaze` to root
+**Note**: If not run as root, this will use `sudo` to set ownership of `kamikaze` to root
 
 ## Usage
 
@@ -21,8 +21,26 @@ usage: kamikaze <command> <arguments>
 
 ## Example
 
+Print effective user id (`id -u`):
+
 ```sh
 $ kamikaze id -u
+0
+```
+
+Run `id -u` in a `kamikaze`-container:
+
+```sh
+$ docker build -t kamikaze - <<EOF
+  FROM alpine
+  RUN set -exuo pipefail \
+    && apk add curl \
+    && curl https://raw.githubusercontent.com/Enteee/kamikaze/master/install.sh | sh
+
+  USER nobody
+  CMD ["/kamikaze", "id", "-u"]
+EOF
+$ docker run kamikaze
 0
 ```
 
@@ -32,7 +50,7 @@ $ kamikaze id -u
 $ nix-build
 ```
 
-**Note**: The built binary can be found under `result/bin/kamikaze'
+**Note**: The built binary can be found under: `result/bin/kamikaze`
 
 ## Development Environment
 
