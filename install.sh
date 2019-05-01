@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -euo pipefail
 REPO="Enteee/kamikaze"
-INSTALL="install -m 4755 -o root kamikaze-download kamikaze"
+INSTALL="install -m 755 -o root kamikaze-download kamikaze && chmod u+s kamikaze"
 
 curl -s "https://api.github.com/repos/${REPO}/releases/latest" \
    | grep "browser_download_url" \
@@ -11,7 +11,7 @@ curl -s "https://api.github.com/repos/${REPO}/releases/latest" \
 trap 'rm kamikaze-download' EXIT
 
 if [[ $(id -u) -ne 0 ]]; then
-  sudo $INSTALL
+  sudo sh -c "${INSTALL}"
 else
-  $INSTALL
+  eval "${INSTALL}"
 fi
