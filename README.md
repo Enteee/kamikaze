@@ -11,9 +11,31 @@ steps in. Install `kamikaze` inside your container and give your startup routine
 $ curl https://raw.githubusercontent.com/Enteee/kamikaze/master/install.sh | sh
 ```
 
-## Examples
+**Note**: This will use `sudo` to set ownership of `kamikaze` to root
 
-## Commands
+## Usage
 
-* Build: `nix-build`
-* Development Environment: `nix-shell`
+```
+usage: kamikaze <command> <arguments>
+```
+
+## Example
+
+```sh
+$ kamikaze id -u
+0
+```
+
+## Build
+
+```sh
+$ nix-build
+```
+
+**Note**: The resulgint binary can be found under `result/bin/kamikaze'
+
+## Development Environment
+
+```sh
+$ nix-shell
+```
