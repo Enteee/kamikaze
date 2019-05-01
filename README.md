@@ -7,7 +7,7 @@ steps in. Install `kamikaze` inside your container and give your startup routine
 
 ## Installation
 
-```
+```sh
 $ curl https://raw.githubusercontent.com/Enteee/kamikaze/master/install.sh | sh
 ```
 
