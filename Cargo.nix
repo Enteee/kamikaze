@@ -15,10 +15,16 @@ rec {
       authors = [ "Ente <ducksource@duckpond.ch>" ];
       edition = "2018";
       src = exclude [ ".git" "target" ] ./.;
+      dependencies = mapFeatures features ([
+        (cratesIO.crates."exec"."${deps."kamikaze"."0.1.0"."exec"}" deps)
+      ]);
     };
     features_.kamikaze."0.1.0" = deps: f: updateFeatures f (rec {
+      exec."${deps.kamikaze."0.1.0".exec}".default = true;
       kamikaze."0.1.0".default = (f.kamikaze."0.1.0".default or true);
-    }) [];
+    }) [
+      (cratesIO.features_.exec."${deps."kamikaze"."0.1.0"."exec"}" deps)
+    ];
 
 
 # end
@@ -27,5 +33,28 @@ rec {
 
   kamikaze = crates.crates.kamikaze."0.1.0" deps;
   __all = [ (kamikaze {}) ];
-  deps.kamikaze."0.1.0" = {};
+  deps.errno."0.2.4" = {
+    errno_dragonfly = "0.1.1";
+    libc = "0.2.54";
+    winapi = "0.3.7";
+  };
+  deps.errno_dragonfly."0.1.1" = {
+    libc = "0.2.54";
+    gcc = "0.3.55";
+  };
+  deps.exec."0.3.1" = {
+    errno = "0.2.4";
+    libc = "0.2.54";
+  };
+  deps.gcc."0.3.55" = {};
+  deps.kamikaze."0.1.0" = {
+    exec = "0.3.1";
+  };
+  deps.libc."0.2.54" = {};
+  deps.winapi."0.3.7" = {
+    winapi_i686_pc_windows_gnu = "0.4.0";
+    winapi_x86_64_pc_windows_gnu = "0.4.0";
+  };
+  deps.winapi_i686_pc_windows_gnu."0.4.0" = {};
+  deps.winapi_x86_64_pc_windows_gnu."0.4.0" = {};
 }

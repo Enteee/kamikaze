@@ -1,12 +1,13 @@
+extern crate exec;
+
 use std::env;
 
 use std::fs;
 
-use std::process::{Command, exit};
+use std::process::exit;
 
 fn usage() {
     println!("usage: kamikaze <command> <arguments>");
-    exit(1);
 }
 
 fn main() {
@@ -22,18 +23,12 @@ fn main() {
         1 => usage(),
         _ => {
             args.remove(0);
-            let mut child = Command::new(args.remove(0))
+            let err = exec::Command::new(args.remove(0))
                 .args(&args)
-                .spawn()
-                .expect("failed to execute process");
-            exit(
-                child
-                    .wait()
-                    .expect("wait failed")
-                        .code().unwrap()
-            );
+                .exec();
+            println!("Error: {}", err);
         },
     }
-
+    exit(1);
 }
 
