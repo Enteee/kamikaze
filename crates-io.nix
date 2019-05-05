@@ -151,6 +151,38 @@ rec {
 
 
 # end
+# users-0.9.1
+
+  crates.users."0.9.1" = deps: { features?(features_.users."0.9.1" deps {}) }: buildRustCrate {
+    crateName = "users";
+    version = "0.9.1";
+    description = "Library for getting information on Unix users and groups";
+    authors = [ "Benjamin Sago <ogham@bsago.me>" ];
+    sha256 = "0k5fc6hq7qmanfrvllij6qqmk9m9h8zmk17gwhcyz1dv11f6hy21";
+    dependencies = mapFeatures features ([
+      (crates."libc"."${deps."users"."0.9.1"."libc"}" deps)
+    ]);
+    features = mkFeatures (features."users"."0.9.1" or {});
+  };
+  features_.users."0.9.1" = deps: f: updateFeatures f (rec {
+    libc."${deps.users."0.9.1".libc}".default = true;
+    users = fold recursiveUpdate {} [
+      { "0.9.1"."cache" =
+        (f.users."0.9.1"."cache" or false) ||
+        (f.users."0.9.1".default or false) ||
+        (users."0.9.1"."default" or false); }
+      { "0.9.1"."mock" =
+        (f.users."0.9.1"."mock" or false) ||
+        (f.users."0.9.1".default or false) ||
+        (users."0.9.1"."default" or false); }
+      { "0.9.1".default = (f.users."0.9.1".default or true); }
+    ];
+  }) [
+    (features_.libc."${deps."users"."0.9.1"."libc"}" deps)
+  ];
+
+
+# end
 # winapi-0.3.7
 
   crates.winapi."0.3.7" = deps: { features?(features_.winapi."0.3.7" deps {}) }: buildRustCrate {

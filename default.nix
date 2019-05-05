@@ -24,6 +24,9 @@ in
     libc = attrs: {
       extraRustcOpts = extraRustcOpts;
     };
+    users = attrs: {
+      extraRustcOpts = extraRustcOpts;
+    };
     winapi = attrs: {
       extraRustcOpts = extraRustcOpts;
     };

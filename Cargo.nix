@@ -17,13 +17,16 @@ rec {
       src = exclude [ ".git" "target" ] ./.;
       dependencies = mapFeatures features ([
         (cratesIO.crates."exec"."${deps."kamikaze"."0.1.0"."exec"}" deps)
+        (cratesIO.crates."users"."${deps."kamikaze"."0.1.0"."users"}" deps)
       ]);
     };
     features_.kamikaze."0.1.0" = deps: f: updateFeatures f (rec {
       exec."${deps.kamikaze."0.1.0".exec}".default = true;
       kamikaze."0.1.0".default = (f.kamikaze."0.1.0".default or true);
+      users."${deps.kamikaze."0.1.0".users}".default = true;
     }) [
       (cratesIO.features_.exec."${deps."kamikaze"."0.1.0"."exec"}" deps)
+      (cratesIO.features_.users."${deps."kamikaze"."0.1.0"."users"}" deps)
     ];
 
 
@@ -49,8 +52,12 @@ rec {
   deps.gcc."0.3.55" = {};
   deps.kamikaze."0.1.0" = {
     exec = "0.3.1";
+    users = "0.9.1";
   };
   deps.libc."0.2.54" = {};
+  deps.users."0.9.1" = {
+    libc = "0.2.54";
+  };
   deps.winapi."0.3.7" = {
     winapi_i686_pc_windows_gnu = "0.4.0";
     winapi_x86_64_pc_windows_gnu = "0.4.0";
