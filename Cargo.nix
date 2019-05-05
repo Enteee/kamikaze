@@ -7,26 +7,26 @@ let inherit (lib.lists) fold;
 in
 rec {
   crates = cratesIO // rec {
-# kamikaze-0.1.0
+# kamikaze-1.0.0
 
-    crates.kamikaze."0.1.0" = deps: { features?(features_.kamikaze."0.1.0" deps {}) }: buildRustCrate {
+    crates.kamikaze."1.0.0" = deps: { features?(features_.kamikaze."1.0.0" deps {}) }: buildRustCrate {
       crateName = "kamikaze";
-      version = "0.1.0";
+      version = "1.0.0";
       authors = [ "Ente <ducksource@duckpond.ch>" ];
       edition = "2018";
       src = exclude [ ".git" "target" ] ./.;
       dependencies = mapFeatures features ([
-        (cratesIO.crates."exec"."${deps."kamikaze"."0.1.0"."exec"}" deps)
-        (cratesIO.crates."users"."${deps."kamikaze"."0.1.0"."users"}" deps)
+        (cratesIO.crates."exec"."${deps."kamikaze"."1.0.0"."exec"}" deps)
+        (cratesIO.crates."users"."${deps."kamikaze"."1.0.0"."users"}" deps)
       ]);
     };
-    features_.kamikaze."0.1.0" = deps: f: updateFeatures f (rec {
-      exec."${deps.kamikaze."0.1.0".exec}".default = true;
-      kamikaze."0.1.0".default = (f.kamikaze."0.1.0".default or true);
-      users."${deps.kamikaze."0.1.0".users}".default = true;
+    features_.kamikaze."1.0.0" = deps: f: updateFeatures f (rec {
+      exec."${deps.kamikaze."1.0.0".exec}".default = true;
+      kamikaze."1.0.0".default = (f.kamikaze."1.0.0".default or true);
+      users."${deps.kamikaze."1.0.0".users}".default = true;
     }) [
-      (cratesIO.features_.exec."${deps."kamikaze"."0.1.0"."exec"}" deps)
-      (cratesIO.features_.users."${deps."kamikaze"."0.1.0"."users"}" deps)
+      (cratesIO.features_.exec."${deps."kamikaze"."1.0.0"."exec"}" deps)
+      (cratesIO.features_.users."${deps."kamikaze"."1.0.0"."users"}" deps)
     ];
 
 
@@ -34,7 +34,7 @@ rec {
 
   };
 
-  kamikaze = crates.crates.kamikaze."0.1.0" deps;
+  kamikaze = crates.crates.kamikaze."1.0.0" deps;
   __all = [ (kamikaze {}) ];
   deps.errno."0.2.4" = {
     errno_dragonfly = "0.1.1";
@@ -50,7 +50,7 @@ rec {
     libc = "0.2.54";
   };
   deps.gcc."0.3.55" = {};
-  deps.kamikaze."0.1.0" = {
+  deps.kamikaze."1.0.0" = {
     exec = "0.3.1";
     users = "0.9.1";
   };
