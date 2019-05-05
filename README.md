@@ -57,3 +57,9 @@ $ nix-build
 ```sh
 $ nix-shell
 ```
+
+## Release Naming
+
+> Kyōiku kanji (教育漢字, literally "education kanji"), also known as Gakunenbetsu kanji haitōhyō (学年別漢字配当表, literally "list of kanji by school year") is a list of 1,006 kanji and associated readings developed and maintained by the Japanese Ministry of Education that prescribes which kanji, and which readings of kanji, Japanese schoolchildren should learn for each year of primary school. Although the list is designed for Japanese children, it can also be used as a sequence of learning characters by non-native speakers as a means of focusing on the most commonly used kanji. (ja:学年別漢字配当表)
+>
+> -- <cite>[from Wikipedia: Kyōiku kanji](https://en.wikipedia.org/wiki/Ky%C5%8Diku_kanji)</cite>
